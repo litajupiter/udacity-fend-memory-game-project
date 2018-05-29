@@ -50,9 +50,10 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+//dynamically generates and shuffles cards
 function initGame() {
     let deck = document.querySelector('.deck');
-    let cardHTML = cards.map(function(card) {
+    let cardHTML = shuffle(cards).map(function(card) {
         return generateCard(card);
     });
 
