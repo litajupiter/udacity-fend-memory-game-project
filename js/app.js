@@ -42,7 +42,7 @@ let openCards = [];
 allCards.forEach(function(card) {
   card.addEventListener('click', function(event) {
 
-      if (!card.classList.contains('open') || !card.classList.contains('show')) {
+      if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
           openCards.push(card);
           card.classList.add('open', 'show');
 
@@ -54,6 +54,6 @@ allCards.forEach(function(card) {
                 openCards = [];
               }, 1000);
           }
-      }    
+      }
   });
 });
