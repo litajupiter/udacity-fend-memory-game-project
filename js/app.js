@@ -12,7 +12,7 @@ const cards = ['fa-diamond', 'fa-diamond',
               ];
 
 function generateCard(card) {
-    return `<li class="card"><i class="fa ${card}"></i></li>`;
+    return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
 
 
@@ -73,13 +73,13 @@ allCards.forEach(function(card) {
           openCards.push(card);
           card.classList.add('open', 'show');
 
-
-          //Check if the cards match
-          let firstCardType = openCards[0].dataset.card;
-          console.log(firstCardType);
-
-          //If cards don't match - go away
           if (openCards.length == 2) {
+              //check if there is a match
+              if (openCards[0].dataset.card == openCards[1].dataset.card) {
+                  console.log('This is a match!');
+              }
+
+              //If no match, hide
               setTimeout(function() {
                 openCards.forEach(function(card) {
                     card.classList.remove('open', 'show');
