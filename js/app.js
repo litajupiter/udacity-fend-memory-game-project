@@ -6,7 +6,7 @@ let t = 0;
 
 function Timer () {
   var timer = setInterval(function() {
-        console.log(t);
+        //console.log(t);
         t++;
         if(t >= 0) {
           time.innerHTML = t;
@@ -16,7 +16,7 @@ function Timer () {
     }, 1000);
 }
 var timer = new Timer();
-console.log(t);
+//console.log(t);
 
 /*
  * Create a list that holds all of your cards
@@ -113,7 +113,7 @@ allCards.forEach(function(card) {
                         card.classList.remove('open', 'show');
                     });
                     openCards = [];
-                  }, 1000);
+                  }, 500);
               }
           }
       }
