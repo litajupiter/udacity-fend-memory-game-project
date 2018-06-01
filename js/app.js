@@ -1,3 +1,23 @@
+//first attempt at timer - code by Robert J Allen
+
+const time = document.getElementById('time');
+// t is a global variable therefore its val can be accessed anywhere
+let t = 0;
+
+function Timer () {
+  var timer = setInterval(function() {
+        console.log(t);
+        t++;
+        if(t >= 0) {
+          time.innerHTML = t;
+          //here you could put other conditionals to make mins or whatever
+           /*clearInterval(timer);*/
+        }
+    }, 1000);
+}
+var timer = new Timer();
+console.log(t);
+
 /*
  * Create a list that holds all of your cards
  */
