@@ -107,3 +107,7 @@ h1 {
     float: right;
     cursor: pointer;
 }
+/* Style to add space between stars and timer */
+.score-panel .timer {
+    margin-left: 2em;
+}

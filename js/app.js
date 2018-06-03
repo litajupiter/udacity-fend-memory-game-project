@@ -1,22 +1,23 @@
-//first attempt at timer - code by Robert J Allen
+// count up timer modified from https://stackoverflow.com/a/5517836/9613093
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+setInterval(setTime, 1000);
 
-const time = document.getElementById('time');
-// t is a global variable therefore its val can be accessed anywhere
-let t = 0;
-
-function Timer () {
-  var timer = setInterval(function() {
-        //console.log(t);
-        t++;
-        if(t >= 0) {
-          time.innerHTML = t;
-          //here you could put other conditionals to make mins or whatever
-           /*clearInterval(timer);*/
-        }
-    }, 1000);
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60);
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
 }
-var timer = new Timer();
-//console.log(t);
+
+function pad(val) {
+  var valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
 
 /*
  * Create a list that holds all of your cards
