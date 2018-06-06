@@ -1,3 +1,18 @@
+//global variables
+const cards = ['fa-diamond', 'fa-diamond',
+               'fa-paper-plane-o', 'fa-paper-plane-o',
+               'fa-anchor', 'fa-anchor',
+               'fa-bolt', 'fa-bolt',
+               'fa-cube', 'fa-cube',
+               'fa-leaf', 'fa-leaf',
+               'fa-bicycle', 'fa-bicycle',
+               'fa-bomb', 'fa-bomb'
+              ];
+
+let openCards = [];
+let matchedCards = [];
+let movesCounter = 0;
+
 // count up timer modified from https://stackoverflow.com/a/5517836/9613093
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
@@ -19,30 +34,6 @@ function pad(val) {
   }
 }
 
-/*
- * Create a list that holds all of your cards
- */
-const cards = ['fa-diamond', 'fa-diamond',
-               'fa-paper-plane-o', 'fa-paper-plane-o',
-               'fa-anchor', 'fa-anchor',
-               'fa-bolt', 'fa-bolt',
-               'fa-cube', 'fa-cube',
-               'fa-leaf', 'fa-leaf',
-               'fa-bicycle', 'fa-bicycle',
-               'fa-bomb', 'fa-bomb'
-              ];
-
-function generateCard(card) {
-    return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
-}
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -71,31 +62,41 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-//dynamically generates and shuffles cards
-function initGame() {
+//Dynamically generates cards
+ function generateCard(card) {
+     return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
+ }
+
+//shuffles and generates cards
+function startGame() {
     let deck = document.querySelector('.deck');
+    //shuffle the list of cards using the provided "shuffle" method
     let cardHTML = shuffle(cards).map(function(card) {
+        //loop through each card and create its HTML
         return generateCard(card);
     });
-
+    //add each card's HTML to the page
     deck.innerHTML = cardHTML.join('');
 }
 
-initGame();
-
+//starts game
+startGame();
 
 const allCards = document.querySelectorAll('.card');
-let openCards = [];
 
 allCards.forEach(function(card) {
   card.addEventListener('click', function(event) {
-
+      //display the card's symbol
       if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
+          //add the card to a *list* of "open" cards
           openCards.push(card);
           card.classList.add('open', 'show');
-
+          //if the list already has another card, check to see if the two cards match
           if (openCards.length == 2) {
-              //check if there is a match
+              //increment the move counter and display it on the page
+              movesCounter++;//works in console.log, need to populate .moves span
+              console.log(movesCounter);
+              //if the cards do match, lock the cards in the open position
               if (openCards[0].dataset.card == openCards[1].dataset.card) {
                   console.log('This is a match!');
                   openCards[0].classList.add('match');
@@ -108,7 +109,7 @@ allCards.forEach(function(card) {
 
                   openCards = [];
               } else {
-                  //If no match, hide
+                  //if the cards do not match, remove the cards from the list and hide the card's symbol
                   setTimeout(function() {
                     openCards.forEach(function(card) {
                         card.classList.remove('open', 'show');
@@ -120,3 +121,4 @@ allCards.forEach(function(card) {
       }
   });
 });
+//if all cards have matched, display a message with the final score

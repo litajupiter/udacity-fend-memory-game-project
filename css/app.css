@@ -111,3 +111,8 @@ h1 {
 .score-panel .timer {
     margin-left: 2em;
 }
+/* Pointer for restart button */
+
+.button:hover {
+  cursor: pointer;
+}
