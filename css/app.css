@@ -107,12 +107,16 @@ h1 {
     float: right;
     cursor: pointer;
 }
-/* Style to add space between stars and timer */
+
+/* Adding space between moves and timer */
 .score-panel .timer {
     margin-left: 2em;
 }
-/* Pointer for restart button */
 
+/* Styles for restart button */
 .button:hover {
   cursor: pointer;
+  font-size: .9em;
+  text-shadow: 0 0 5px #02ccba;
+  box-shadow: 0 0 10px #9900ff;
 }
