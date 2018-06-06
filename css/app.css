@@ -95,7 +95,8 @@ h1 {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 5px 0 0;
+    /* increased margin from 5px to 10 px after adding 2 stars */
+    margin: 0 10px 0 0;
 }
 
 .score-panel .stars li {
@@ -110,7 +111,7 @@ h1 {
 
 /* Adding space between moves and timer */
 .score-panel .timer {
-    margin-left: 2em;
+    margin-left: 1.5em;
 }
 
 /* Styles for restart button */
