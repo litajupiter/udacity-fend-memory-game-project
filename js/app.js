@@ -12,11 +12,11 @@ const cards = ['fa-diamond', 'fa-diamond',
 let openCards = [];
 let matchedCards = [];
 let movesCounter = 0;
+const minutesLabel = document.getElementById('minutes');
+const secondsLabel = document.getElementById('seconds');
+let totalSeconds = 0;
 
 // count up timer modified from https://stackoverflow.com/a/5517836/9613093
-var minutesLabel = document.getElementById("minutes");
-var secondsLabel = document.getElementById("seconds");
-var totalSeconds = 0;
 setInterval(setTime, 1000);
 
 function setTime() {
