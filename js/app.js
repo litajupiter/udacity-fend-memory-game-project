@@ -24,6 +24,7 @@ let totalSeconds = 0;
 
 //win Modal
 const modal = document.getElementById('winModal');
+let finalMoves = document.querySelector('.num-moves');
 
 // count up timer function modified from https://stackoverflow.com/a/5517836/9613093
 function setTime() {
@@ -156,12 +157,11 @@ function addAMove(){
 //if all cards have matched, display a message with the final score
 function allMatched() {
   modal.style.display = "block";
+  finalMoves.innerHTML = moves;
 }
 
 //game displays a star rating from 1 to 3 stars - after some number of moves, star rating lowers
 
-
-//code below from w3schools how to make a modal box -- needs edited
 
 //Get the <span> element that closes the modal
 var close = document.getElementsByClassName('close')[0];
