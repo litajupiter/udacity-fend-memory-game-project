@@ -1,4 +1,3 @@
-//global variables
 //list of all cards
 const allCards = ['fa-diamond', 'fa-diamond',
                'fa-paper-plane-o', 'fa-paper-plane-o',
@@ -14,7 +13,7 @@ let openCards = [];
 //track cards that have been matched
 let matchedCards = [];
 //moves variables
-let movesCounter = document.querySelector('.moves');
+let moveCounter = document.querySelector('.moves');
 let moves = 0;
 //timer variables
 const minutesLabel = document.getElementById('minutes');
@@ -87,8 +86,6 @@ function newGame() {
 //starts new game and shuffles cards
 newGame();
 
-//const allCards = document.querySelectorAll('.card');
-
 //set up the event listener for a card. If a card is clicked:
 const cards = document.querySelectorAll('.card');
 
@@ -102,7 +99,8 @@ cards.forEach(function(card) {
           //if the list already has another card, check to see if the two cards match
           if (openCards.length == 2) {
               //increment the move counter and display it on the page
-              moves++;//works in console.log, need to populate .moves span
+              addAMove();
+              //moves++;//works in console.log, need to populate .moves span
               console.log(moves);
               //if the cards do match, lock the cards in the open position
               if (openCards[0].dataset.card == openCards[1].dataset.card) {
@@ -134,18 +132,21 @@ function cardMatch() {
 
 //if the cards do not match, remove the cards from the list and hide the card's symbol
 function notAMatch() {
+  //flip back over after half a second
   setTimeout(function() {
     openCards.forEach(function(card) {
       card.classList.remove('open', 'show');
     });
+    //empty array
     openCards = [];
   }, 500);
-
-
-
 }
 
-
+//move counter
+function addAMove(){
+  moves++;
+  moveCounter.innerHTML = moves;
+}
 
 
 //if all cards have matched, display a message with the final score
