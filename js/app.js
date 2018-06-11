@@ -106,22 +106,20 @@ cards.forEach(function(card) {
               console.log(moves);
               //if the cards do match, lock the cards in the open position
               if (openCards[0].dataset.card == openCards[1].dataset.card) {
+                  //add to matchedCards list
                   matchedCards.push(card);
+                  //if the cards do match, lock the cards in the open position
                   cardMatch();
               } else {
                   //if the cards do not match, remove the cards from the list and hide the card's symbol
-                  setTimeout(function() {
-                    openCards.forEach(function(card) {
-                        card.classList.remove('open', 'show');
-                    });
-                    openCards = [];
-                  }, 500);
+                  notAMatch();
               }
           }
       }
   });
 });
-//if cards match
+
+//if the cards do match, lock the cards in the open position
 function cardMatch() {
   openCards[0].classList.add('match');
   openCards[0].classList.add('open');
@@ -132,6 +130,19 @@ function cardMatch() {
   openCards[1].classList.add('show');
   //empty array
   openCards = [];
+}
+
+//if the cards do not match, remove the cards from the list and hide the card's symbol
+function notAMatch() {
+  setTimeout(function() {
+    openCards.forEach(function(card) {
+      card.classList.remove('open', 'show');
+    });
+    openCards = [];
+  }, 500);
+
+
+
 }
 
 
