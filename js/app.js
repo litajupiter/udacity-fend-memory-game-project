@@ -13,18 +13,19 @@ let openCards = [];
 //track number of cards that have been matched
 let matched = 0;
 //moves variables
-let moveCounter = document.querySelector('.moves');
+const moveCounter = document.querySelector('.moves');
 let moves = 0;
 //stars
-let allStars = document.querySelectorAll('ul.stars li');
+const allStars = document.querySelectorAll('ul.stars li');
 //timer variables
 const minutesLabel = document.getElementById('minutes');
 const secondsLabel = document.getElementById('seconds');
 let totalSeconds = 0;
 
-setInterval(setTime, 1000);
+//win Modal
+const modal = document.getElementById('winModal');
 
-// count up timer modified from https://stackoverflow.com/a/5517836/9613093
+// count up timer function modified from https://stackoverflow.com/a/5517836/9613093
 function setTime() {
   ++totalSeconds;
   secondsLabel.innerHTML = pad(totalSeconds % 60);
@@ -39,7 +40,6 @@ function pad(val) {
     return valString;
   }
 }
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -83,6 +83,8 @@ function newGame() {
     });
     //add each card's HTML to the page
     deck.innerHTML = cardGrid.join('');
+    //starts timer
+    setInterval(setTime, 1000);
 }
 
 //starts new game and shuffles cards
@@ -102,9 +104,6 @@ cards.forEach(function(card) {
           if (openCards.length == 2) {
               //increment the move counter and display it on the page
               addAMove();
-              //moves++;//works in console.log, need to populate .moves span
-              console.log(moves);
-              //if the cards do match, lock the cards in the open position
               if (openCards[0].dataset.card == openCards[1].dataset.card) {
                   //if the cards do match, lock the cards in the open position
                   cardMatch();
@@ -113,6 +112,9 @@ cards.forEach(function(card) {
                   notAMatch();
               }
           }
+      }
+      if (matched === 16) {
+        allMatched()
       }
   });
 });
@@ -151,31 +153,21 @@ function addAMove(){
   moveCounter.innerHTML = moves;
 }
 
-
 //if all cards have matched, display a message with the final score
-
-
-
-//game displays a star rating from 1 to at least 3 stars - after some number of moves, star rating lowers
-function
-
-//code below from w3schools how to make a modal box -- needs edited
-//Get the modal
-var modal = document.getElementById('winModal');
-
-//Get the button that opens the modal
-var btn = document.getElementById('myBtn');
-
-//Get the <span> element that closes the modal
-var span = document.getElementsByClassName('close')[0];
-
-//When the user clicks on the button, open the modal
-btn.onclick = function() {
+function allMatched() {
   modal.style.display = "block";
 }
 
+//game displays a star rating from 1 to 3 stars - after some number of moves, star rating lowers
+
+
+//code below from w3schools how to make a modal box -- needs edited
+
+//Get the <span> element that closes the modal
+var close = document.getElementsByClassName('close')[0];
+
 //When the user clicks on <span>(x), close the modal
-span.onclick = function() {
+close.onclick = function() {
   modal.style.display = "none";
 }
 
