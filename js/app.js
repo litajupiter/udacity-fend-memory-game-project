@@ -1,5 +1,6 @@
 //global variables
-const cards = ['fa-diamond', 'fa-diamond',
+//list of all cards
+const allCards = ['fa-diamond', 'fa-diamond',
                'fa-paper-plane-o', 'fa-paper-plane-o',
                'fa-anchor', 'fa-anchor',
                'fa-bolt', 'fa-bolt',
@@ -8,17 +9,21 @@ const cards = ['fa-diamond', 'fa-diamond',
                'fa-bicycle', 'fa-bicycle',
                'fa-bomb', 'fa-bomb'
               ];
-
+//track cards that have been flipped open
 let openCards = [];
+//track cards that have been matched
 let matchedCards = [];
-let movesCounter = 0;
+//moves variables
+let movesCounter = document.querySelector('.moves');
+let moves = 0;
+//timer variables
 const minutesLabel = document.getElementById('minutes');
 const secondsLabel = document.getElementById('seconds');
 let totalSeconds = 0;
 
-// count up timer modified from https://stackoverflow.com/a/5517836/9613093
 setInterval(setTime, 1000);
 
+// count up timer modified from https://stackoverflow.com/a/5517836/9613093
 function setTime() {
   ++totalSeconds;
   secondsLabel.innerHTML = pad(totalSeconds % 60);
@@ -62,29 +67,32 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-//Dynamically generates cards
- function generateCard(card) {
+//loop through each card and create its HTML
+ function makeCard(card) {
      return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
  }
 
 //shuffles and generates cards
-function startGame() {
+function newGame() {
     let deck = document.querySelector('.deck');
     //shuffle the list of cards using the provided "shuffle" method
-    let cardHTML = shuffle(cards).map(function(card) {
+    let cardGrid = shuffle(allCards).map(function(card) {
         //loop through each card and create its HTML
-        return generateCard(card);
+        return makeCard(card);
     });
     //add each card's HTML to the page
-    deck.innerHTML = cardHTML.join('');
+    deck.innerHTML = cardGrid.join('');
 }
 
-//starts game
-startGame();
+//starts new game and shuffles cards
+newGame();
 
-const allCards = document.querySelectorAll('.card');
+//const allCards = document.querySelectorAll('.card');
 
-allCards.forEach(function(card) {
+//set up the event listener for a card. If a card is clicked:
+const cards = document.querySelectorAll('.card');
+
+cards.forEach(function(card) {
   card.addEventListener('click', function(event) {
       //display the card's symbol
       if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
@@ -94,20 +102,12 @@ allCards.forEach(function(card) {
           //if the list already has another card, check to see if the two cards match
           if (openCards.length == 2) {
               //increment the move counter and display it on the page
-              movesCounter++;//works in console.log, need to populate .moves span
-              console.log(movesCounter);
+              moves++;//works in console.log, need to populate .moves span
+              console.log(moves);
               //if the cards do match, lock the cards in the open position
               if (openCards[0].dataset.card == openCards[1].dataset.card) {
-                  console.log('This is a match!');
-                  openCards[0].classList.add('match');
-                  openCards[0].classList.add('open');
-                  openCards[0].classList.add('show');
-
-                  openCards[1].classList.add('match');
-                  openCards[1].classList.add('open');
-                  openCards[1].classList.add('show');
-
-                  openCards = [];
+                  matchedCards.push(card);
+                  cardMatch();
               } else {
                   //if the cards do not match, remove the cards from the list and hide the card's symbol
                   setTimeout(function() {
@@ -121,6 +121,22 @@ allCards.forEach(function(card) {
       }
   });
 });
+//if cards match
+function cardMatch() {
+  openCards[0].classList.add('match');
+  openCards[0].classList.add('open');
+  openCards[0].classList.add('show');
+
+  openCards[1].classList.add('match');
+  openCards[1].classList.add('open');
+  openCards[1].classList.add('show');
+  //empty array
+  openCards = [];
+}
+
+
+
+
 //if all cards have matched, display a message with the final score
 
 //code below from w3schools how to make a modal box -- needs edited
