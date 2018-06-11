@@ -15,6 +15,8 @@ let matched = 0;
 //moves variables
 let moveCounter = document.querySelector('.moves');
 let moves = 0;
+//stars
+let allStars = document.querySelectorAll('ul.stars li');
 //timer variables
 const minutesLabel = document.getElementById('minutes');
 const secondsLabel = document.getElementById('seconds');
@@ -151,6 +153,11 @@ function addAMove(){
 
 
 //if all cards have matched, display a message with the final score
+
+
+
+//game displays a star rating from 1 to at least 3 stars - after some number of moves, star rating lowers
+function
 
 //code below from w3schools how to make a modal box -- needs edited
 //Get the modal
