@@ -10,8 +10,8 @@ const allCards = ['fa-diamond', 'fa-diamond',
               ];
 //track cards that have been flipped open
 let openCards = [];
-//track cards that have been matched
-let matchedCards = [];
+//track number of cards that have been matched
+let matched = 0;
 //moves variables
 let moveCounter = document.querySelector('.moves');
 let moves = 0;
@@ -104,8 +104,6 @@ cards.forEach(function(card) {
               console.log(moves);
               //if the cards do match, lock the cards in the open position
               if (openCards[0].dataset.card == openCards[1].dataset.card) {
-                  //add to matchedCards list
-                  matchedCards.push(card);
                   //if the cards do match, lock the cards in the open position
                   cardMatch();
               } else {
@@ -119,6 +117,9 @@ cards.forEach(function(card) {
 
 //if the cards do match, lock the cards in the open position
 function cardMatch() {
+  //add 2 to the tally of matched cards
+  matched += 2;
+  console.log(`you have matched ${matched} cards`);
   openCards[0].classList.add('match');
   openCards[0].classList.add('open');
   openCards[0].classList.add('show');
