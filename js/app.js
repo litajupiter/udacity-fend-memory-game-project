@@ -25,6 +25,7 @@ let totalSeconds = 0;
 //win Modal
 const modal = document.getElementById('winModal');
 let finalMoves = document.querySelector('.num-moves');
+let finalStars = document.querySelector('.num-stars');
 
 // count up timer function modified from https://stackoverflow.com/a/5517836/9613093
 function setTime() {
@@ -114,6 +115,7 @@ cards.forEach(function(card) {
               }
           }
       }
+      //if all cards have matched, display a message with the final score
       if (matched === 16) {
         allMatched()
       }
@@ -156,8 +158,12 @@ function addAMove(){
 
 //if all cards have matched, display a message with the final score
 function allMatched() {
+  //makes modal visible
   modal.style.display = "block";
+  //final number of moves
   finalMoves.innerHTML = moves;
+  //final star rating
+  finalStars.innerHTML = allStars.length;
 }
 
 //game displays a star rating from 1 to 3 stars - after some number of moves, star rating lowers
