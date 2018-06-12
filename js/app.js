@@ -16,7 +16,8 @@ let matched = 0;
 const moveCounter = document.querySelector('.moves');
 let moves = 0;
 //stars
-const allStars = document.querySelectorAll('ul.stars li');
+let allStars = document.querySelectorAll('ul.stars li');
+
 //timer variables
 const minutesLabel = document.getElementById('minutes');
 const secondsLabel = document.getElementById('seconds');
@@ -154,6 +155,20 @@ function notAMatch() {
 function addAMove(){
   moves++;
   moveCounter.innerHTML = moves;
+  //game displays a star rating from 1 to at least 3 stars - after some number of moves, star rating lowers
+  if (moves > 8 && moves < 12) {
+    for(var i = 0; i < allStars.length; i++) {
+      if (i > 1) {
+        allStars[i].style.visibility = "collapse";
+      }
+    }
+  } else if (moves > 13) {
+    for(var i = 0; i < allStars.length; i++) {
+      if(i > 0) {
+        allStars[i].style.visibility = "collapse";
+      }
+    }
+  }
 }
 
 //if all cards have matched, display a message with the final score
@@ -162,12 +177,9 @@ function allMatched() {
   modal.style.display = "block";
   //final number of moves
   finalMoves.innerHTML = moves;
-  //final star rating
+  //final star rating - note picks up on html length, doesn't show if a star is removed at present
   finalStars.innerHTML = allStars.length;
 }
-
-//game displays a star rating from 1 to 3 stars - after some number of moves, star rating lowers
-
 
 //Get the <span> element that closes the modal
 var close = document.getElementsByClassName('close')[0];
