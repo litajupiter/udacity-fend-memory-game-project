@@ -17,6 +17,8 @@ const moveCounter = document.querySelector('.moves');
 let moves = 0;
 //stars
 const stars = document.querySelector('.stars');
+//starting with 5 stars
+let numStars = 5;
 
 //timer variables
 const minutesLabel = document.getElementById('minutes');
@@ -158,15 +160,19 @@ function addAMove(){
   moveCounter.innerHTML = moves;
   //game displays a star rating from 1 to at least 3 stars - after some number of moves, star rating lowers
   if (moves > 8 && moves < 12) {
+    numStars = 4;
     stars.innerHTML = `<li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li>`;
   }
   if (moves >= 12 && moves < 20) {
+    numStars = 3;
     stars.innerHTML = `<li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li>`;
   }
   if (moves >= 20 && moves < 30) {
+    numStars = 2;
     stars.innerHTML = `<li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li>`;
   }
   if (moves > 30) {
+    numStars = 1;
     stars.innerHTML = `<li class="star"><i class="fa fa-star"></i></li>`;
   }
 }
@@ -178,7 +184,7 @@ function allMatched() {
   //final number of moves
   finalMoves.innerHTML = moves;
   //final star rating - need to figure out what it needs to pick up on to match vs what is in the index
-  finalStars.innerHTML = allStars.length;
+  finalStars.innerHTML = numStars;
   //final time - NOT WORKING AS IS
   finalTime.innerHTML = timer;
   //need to stop the timer - NOT WORKING AS IS
