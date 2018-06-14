@@ -21,9 +21,11 @@ const stars = document.querySelector('.stars');
 let numStars = 5;
 
 //timer variables
-const minutesLabel = document.getElementById('minutes');
-const secondsLabel = document.getElementById('seconds');
-let totalSeconds = 0;
+// const timer = document.querySelector('.timer');
+// const minutesLabel = document.getElementById('minutes');
+// const secondsLabel = document.getElementById('seconds');
+// let totalSeconds = 0;
+let seconds = 0;
 
 //win Modal
 const modal = document.getElementById('winModal');
@@ -31,21 +33,33 @@ let finalMoves = document.querySelector('.num-moves');
 let finalStars = document.querySelector('.num-stars');
 let finalTime = document.querySelector('.modal-timer');
 
-// count up timer function modified from https://stackoverflow.com/a/5517836/9613093
-function setTime() {
-  ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-}
+//attempt at new timer function
+function timer() {
+  function countSeconds() {
+    if (moves !== 0 && matched < 16) {
+      seconds++
+      document.querySelector('.timer').innerHTML = seconds;
+    }
+  } setInterval(countSeconds, 1000);
+};
 
-function pad(val) {
-  var valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
-  }
-}
+timer();
+
+// count up timer function modified from https://stackoverflow.com/a/5517836/9613093
+// function setTime() {
+//   ++totalSeconds;
+//   secondsLabel.innerHTML = pad(totalSeconds % 60);
+//   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+// }
+//
+// function pad(val) {
+//   var valString = val + "";
+//   if (valString.length < 2) {
+//     return "0" + valString;
+//   } else {
+//     return valString;
+//   }
+// }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -90,7 +104,7 @@ function newGame() {
     //add each card's HTML to the page
     deck.innerHTML = cardGrid.join('');
     //starts timer
-    setInterval(setTime, 1000);
+    //setInterval(setTime, 1000);
 }
 
 //starts new game and shuffles cards
@@ -186,9 +200,7 @@ function allMatched() {
   //final star rating - need to figure out what it needs to pick up on to match vs what is in the index
   finalStars.innerHTML = numStars;
   //final time - NOT WORKING AS IS
-  finalTime.innerHTML = timer;
-  //need to stop the timer - NOT WORKING AS IS
-  clearInterval(setTime);
+  finalTime.innerHTML = `${seconds} seconds`;
 }
 
 //Get the <span> element that closes the modal
