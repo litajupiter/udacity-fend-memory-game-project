@@ -16,7 +16,7 @@ let matched = 0;
 const moveCounter = document.querySelector('.moves');
 let moves = 0;
 //stars
-let allStars = document.querySelectorAll('ul.stars li');
+const stars = document.querySelector('.stars');
 
 //timer variables
 const minutesLabel = document.getElementById('minutes');
@@ -27,6 +27,7 @@ let totalSeconds = 0;
 const modal = document.getElementById('winModal');
 let finalMoves = document.querySelector('.num-moves');
 let finalStars = document.querySelector('.num-stars');
+let finalTime = document.querySelector('.modal-timer');
 
 // count up timer function modified from https://stackoverflow.com/a/5517836/9613093
 function setTime() {
@@ -118,7 +119,7 @@ cards.forEach(function(card) {
       }
       //if all cards have matched, display a message with the final score
       if (matched === 16) {
-        allMatched()
+        allMatched();
       }
   });
 });
@@ -151,34 +152,37 @@ function notAMatch() {
   }, 500);
 }
 
-//move counter
+//move counter and dynamic star rating
 function addAMove(){
   moves++;
   moveCounter.innerHTML = moves;
   //game displays a star rating from 1 to at least 3 stars - after some number of moves, star rating lowers
   if (moves > 8 && moves < 12) {
-    for(var i = 0; i < allStars.length; i++) {
-      if (i > 1) {
-        allStars[i].style.visibility = "collapse";
-      }
-    }
-  } else if (moves > 13) {
-    for(var i = 0; i < allStars.length; i++) {
-      if(i > 0) {
-        allStars[i].style.visibility = "collapse";
-      }
-    }
+    stars.innerHTML = `<li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li>`;
+  }
+  if (moves >= 12 && moves < 20) {
+    stars.innerHTML = `<li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li>`;
+  }
+  if (moves >= 20 && moves < 30) {
+    stars.innerHTML = `<li class="star"><i class="fa fa-star"></i></li><li class="star"><i class="fa fa-star"></i></li>`;
+  }
+  if (moves > 30) {
+    stars.innerHTML = `<li class="star"><i class="fa fa-star"></i></li>`;
   }
 }
 
 //if all cards have matched, display a message with the final score
 function allMatched() {
-  //makes modal visible
+    //makes modal visible
   modal.style.display = "block";
   //final number of moves
   finalMoves.innerHTML = moves;
-  //final star rating - note picks up on html length, doesn't show if a star is removed at present
+  //final star rating - need to figure out what it needs to pick up on to match vs what is in the index
   finalStars.innerHTML = allStars.length;
+  //final time - NOT WORKING AS IS
+  finalTime.innerHTML = timer;
+  //need to stop the timer - NOT WORKING AS IS
+  clearInterval(setTime);
 }
 
 //Get the <span> element that closes the modal
