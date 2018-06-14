@@ -19,12 +19,7 @@ let moves = 0;
 const stars = document.querySelector('.stars');
 //starting with 5 stars
 let numStars = 5;
-
 //timer variables
-// const timer = document.querySelector('.timer');
-// const minutesLabel = document.getElementById('minutes');
-// const secondsLabel = document.getElementById('seconds');
-// let totalSeconds = 0;
 let seconds = 0;
 
 //win Modal
@@ -33,7 +28,7 @@ let finalMoves = document.querySelector('.num-moves');
 let finalStars = document.querySelector('.num-stars');
 let finalTime = document.querySelector('.modal-timer');
 
-//attempt at new timer function
+//timer function, stops when game is complete
 function timer() {
   function countSeconds() {
     if (moves !== 0 && matched < 16) {
@@ -44,22 +39,6 @@ function timer() {
 };
 
 timer();
-
-// count up timer function modified from https://stackoverflow.com/a/5517836/9613093
-// function setTime() {
-//   ++totalSeconds;
-//   secondsLabel.innerHTML = pad(totalSeconds % 60);
-//   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-// }
-//
-// function pad(val) {
-//   var valString = val + "";
-//   if (valString.length < 2) {
-//     return "0" + valString;
-//   } else {
-//     return valString;
-//   }
-// }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -103,8 +82,6 @@ function newGame() {
     });
     //add each card's HTML to the page
     deck.innerHTML = cardGrid.join('');
-    //starts timer
-    //setInterval(setTime, 1000);
 }
 
 //starts new game and shuffles cards
@@ -197,10 +174,10 @@ function allMatched() {
   modal.style.display = "block";
   //final number of moves
   finalMoves.innerHTML = moves;
-  //final star rating - need to figure out what it needs to pick up on to match vs what is in the index
+  //final star rating
   finalStars.innerHTML = numStars;
-  //final time - NOT WORKING AS IS
-  finalTime.innerHTML = `${seconds} seconds`;
+  //final time
+  finalTime.innerHTML = seconds;
 }
 
 //Get the <span> element that closes the modal
