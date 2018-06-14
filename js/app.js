@@ -121,7 +121,6 @@ cards.forEach(function(card) {
 function cardMatch() {
   //add 2 to the tally of matched cards
   matched += 2;
-  console.log(`you have matched ${matched} cards`);
   openCards[0].classList.add('match');
   openCards[0].classList.add('open');
   openCards[0].classList.add('show');
@@ -170,7 +169,7 @@ function addAMove(){
 
 //if all cards have matched, display a message with the final score
 function allMatched() {
-    //makes modal visible
+  //makes modal visible
   modal.style.display = "block";
   //final number of moves
   finalMoves.innerHTML = moves;
